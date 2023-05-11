@@ -1,5 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { catchError } from "rxjs/operators";
+import { throwError } from "rxjs";
 
 interface AuthLoginResponseData{
     message: string
@@ -23,7 +25,14 @@ export class AuthService{
             lastname:"bob",
             email,
             password
-        })
+        }).pipe(
+            catchError(errorRes=>{
+                if(!errorRes.error || !errorRes.error.message){
+                    return throwError('unknown error')
+                }
+                return throwError(errorRes.error.message)
+            })
+        )
     }
 
     login(email: string, password: string){

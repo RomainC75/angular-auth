@@ -11,7 +11,6 @@ export class AuthComponent {
   isLoginMode = true;
   isLoading = false;
   error: string = null;
-  errorMessage: string= null
 
   constructor(private authService: AuthService) {}
 
@@ -32,10 +31,9 @@ export class AuthComponent {
           console.log("resData", resData);
           this.isLoading = false
         },
-        (error) => {
-          console.log("error : ", error);
-          this.error=" an error occured"
-          this.errorMessage = error.error.message
+        (errorMessage) => {
+          console.log("error : ", errorMessage);
+          this.error = errorMessage
           this.isLoading = false
         }
       );

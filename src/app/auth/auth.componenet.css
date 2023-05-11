@@ -1,0 +1,8 @@
+.alert{
+    background-color: rgb(255, 207, 207);
+    height:3rem;
+}
+
+.alert-danger{
+    color:red;
+}
